@@ -1,18 +1,23 @@
-function Player({ stats }) {
-  const { avg, slg, team_full, ops, h, hr, rbi, bb } = stats;
+function Player({ playerInfo }) {
+  const {
+    name_display_first_last_html,
+    primary_position_txt,
+    player_id,
+    throws,
+    bats,
+    team_name,
+    name_nick,
+  } = playerInfo;
   return (
     <>
-      <h1>Player</h1>
+      <h1>{name_display_first_last_html} </h1>
+      <span>{name_nick ? `(${name_nick})` : ''}</span>
       <br />
       <ul>
-        <li>Team:{team_full}</li>
-        <li>Average:{avg}</li>
-        <li>Slugging:{slg}</li>
-        <li>OPS:{ops}</li>
-        <li>Hits:{h}</li>
-        <li>Walks:{bb}</li>
-        <li>Homeruns:{hr}</li>
-        <li>RBI's:{rbi}</li>
+        <div>Team: {team_name}</div>
+        <div>Primary Position: {primary_position_txt}</div>
+        <div>Throws: {throws}</div>
+        <div>Bats: {bats}</div>
       </ul>
     </>
   );
@@ -41,30 +46,16 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const { id } = params;
-  // if (position === 'P') {
-  //   const res = await fetch(
-  //     `http://lookup-service-prod.mlb.com/json/named.sport_career_pitching_lg.bam?league_list_id='mlb'&game_type='R'&player_id='${params.id}'`
-  //   );
-  //   const data = await res.json();
-  //   const stats = data.sport_career_pitching_lg.queryResults.row;
-  //   return {
-  //     props: {
-  //       name: name,
-  //       stats,
-  //     },
-  //   };
-  // } else {
   const res = await fetch(
-    `http://lookup-service-prod.mlb.com/json/named.sport_hitting_tm.bam?league_list_id=%27mlb%27&game_type=%27R%27&season=%272021%27&player_id=%27${params.id}%27`
+    `http://lookup-service-prod.mlb.com/json/named.player_info.bam?sport_code='mlb'&player_id='${id}'`
   );
   const data = await res.json();
-  const stats = data.sport_hitting_tm.queryResults.row;
+  const playerInfo = data.player_info.queryResults.row;
+  console.log(playerInfo);
   return {
     props: {
-      //name: name,
-      stats,
+      playerInfo,
     },
-    // };
   };
 }
 
