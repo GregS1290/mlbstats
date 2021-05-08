@@ -1,22 +1,20 @@
 import Link from 'next/link';
+import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
 
 function Roster({ roster }) {
   return (
     <>
-      <h1>Yankees Active Roster:</h1>
-      {roster
-        // .filter((player) => {
-        //   if (player.status_code === 'A') {
-        //     return player;
-        //   }
-        // })
-        .map((player) => (
+      <Paper elevation={3}>
+        <Typography variant='h2'>Yankees Active Roster:</Typography>
+        {roster.map((player) => (
           <div key={player.player_id}>
             <Link href={`roster/${player.player_id}`}>
               <a>{player.name_display_first_last}</a>
             </Link>
           </div>
         ))}
+      </Paper>
     </>
   );
 }
