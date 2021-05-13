@@ -1,7 +1,9 @@
 import PitcherCard from '../../components/pitcherStatsCard';
 import PositionCard from '../../components/pitcherStatsCard';
+//import PlayerInfoCard from '../../components/playerInfoCard';
+import { useRouter } from 'next/router';
 
-function Player({ playerInfo }) {
+function PlayerInfoCard({ playerInfo }) {
   const {
     name_display_first_last,
     primary_position_txt,
@@ -23,18 +25,16 @@ function Player({ playerInfo }) {
       <div>Primary Position: {primary_position_txt}</div>
       <div>Throws: {throws}</div>
       <div>Bats: {bats}</div>
-      <div>
-        {primary_stat_type === 'pitching' ? <PositionCard /> : <PitcherCard />}
-      </div>
     </>
   );
 }
 
 export async function getStaticPaths() {
   const res = await fetch(
-    `http://lookup-service-prod.mlb.com/json/named.roster_40.bam?team_id='147'`
+    `http://lookup-service-prod.mlb.com/json/named.roster_40.bam?team_id='141'`
   );
   const data = await res.json();
+
   const roster = data.roster_40.queryResults.row.filter((player) => {
     if (player.status_code === 'A') {
       return player;
@@ -67,4 +67,4 @@ export async function getStaticProps({ params }) {
 }
 
 //***UTILIZE PRIMARY STAT TYPE TO GENERATE SECOND QUERY ***
-export default Player;
+export default PlayerInfoCard;
