@@ -31,7 +31,7 @@ function PlayerInfoCard({ playerInfo }) {
 
 export async function getStaticPaths() {
   const res = await fetch(
-    `http://lookup-service-prod.mlb.com/json/named.roster_40.bam?team_id='141'`
+    `http://lookup-service-prod.mlb.com/json/named.roster_40.bam?team_id='${teamid}'`
   );
   const data = await res.json();
 
