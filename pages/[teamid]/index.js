@@ -1,8 +1,11 @@
 import Link from 'next/link';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import { useRouter } from 'next/router';
 
 function Roster({ roster }) {
+  const router = useRouter();
+  console.log(router.query);
   return (
     <>
       <Paper elevation={3}>
