@@ -174,6 +174,7 @@ export default function Home({ stats }) {
           <a>View Diamondbacks Roster</a>
         </Link>
       </div>
+
       <div>
         <HittingLeaders stats={stats} />
       </div>

@@ -1,11 +1,8 @@
 import Link from 'next/link';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import { useRouter } from 'next/router';
 
 function Roster({ roster }) {
-  const router = useRouter();
-  console.log(router.query);
   return (
     <>
       <Paper elevation={3}>
@@ -28,6 +25,7 @@ export async function getStaticPaths() {
   );
   const data = await res.json();
 
+  console.log(data.team_all_season.queryResults.row);
   const paths = data.team_all_season.queryResults.row.map((team) => ({
     params: {
       teamid: team.mlb_org_id,
