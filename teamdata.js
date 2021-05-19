@@ -34,7 +34,7 @@ export const nlCentral = [
   { club: 'Chicago Cubs', id: '/112' },
   { club: 'Cincinnati Reds', id: '/113' },
   { club: 'St. Louis Cardinals', id: '/138' },
-  { club: 'Milwaukee Brewers', id: '/121' },
+  { club: 'Milwaukee Brewers', id: '/158' },
   { club: 'Pittsburgh Pirates', id: '/134' },
 ];
 
@@ -42,6 +42,6 @@ export const nlWest = [
   { club: 'Los Angeles Dodgers', id: '/119' },
   { club: 'Colorado Rockies', id: '/115' },
   { club: 'San Francisco Giants', id: '/137' },
-  { club: 'San Diego Padres', id: '/158' },
+  { club: 'San Diego Padres', id: '/135' },
   { club: 'Arizona Diamondbacks', id: '/109' },
 ];

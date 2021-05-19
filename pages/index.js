@@ -4,6 +4,8 @@ import styles from '../styles/Home.module.css';
 import Link from 'next/link';
 import HittingLeaders from '../components/hittingLeaders';
 import DivisionCard from '../components/divisionCard';
+import PitchingLeaders from '../components/pitchingLeaders';
+
 import {
   alEast,
   alCentral,
@@ -13,11 +15,15 @@ import {
   nlWest,
 } from '../teamdata';
 
-export default function Home({ stats }) {
+export default function Home(props) {
+  const { hittingStats, pitchingStats } = props;
   return (
     <>
       <div>
-        <HittingLeaders stats={stats} />
+        <HittingLeaders stats={hittingStats} />
+      </div>
+      <div>
+        <PitchingLeaders stats={pitchingStats} />
       </div>
       <div>
         <Link href='/stats'>
@@ -54,13 +60,19 @@ export async function getStaticProps() {
     `http://lookup-service-prod.mlb.com/json/named.leader_pitching_repeater.bam?sport_code='mlb'&results=5&game_type='R'&season='2021'&sort_column='era'&leader_pitching_repeater`
   );
 
-  const data = await res.json();
-  const stats =
-    data.leader_hitting_repeater.leader_hitting_mux.queryResults.row;
+  const hitterData = await hRes.json();
+  const pitcherData = await pRes.json();
+
+  const hittingStats =
+    hitterData.leader_hitting_repeater.leader_hitting_mux.queryResults.row;
+
+  const pitchingStats =
+    pitcherData.leader_pitching_repeater.leader_pitching_mux.queryResults.row;
 
   return {
     props: {
-      stats,
+      pitchingStats,
+      hittingStats,
     },
   };
 }
