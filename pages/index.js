@@ -17,6 +17,9 @@ export default function Home({ stats }) {
   return (
     <>
       <div>
+        <HittingLeaders stats={stats} />
+      </div>
+      <div>
         <Link href='/stats'>
           <a>Aaron Judge</a>
         </Link>
@@ -28,6 +31,7 @@ export default function Home({ stats }) {
         <DivisionCard teams={alCentral} division={'AL Central'} />
         <br />
         <DivisionCard teams={alWest} division={'AL West'} />
+        <br />
       </div>
 
       <div>
@@ -37,17 +41,17 @@ export default function Home({ stats }) {
         <br />
         <DivisionCard teams={nlWest} division={'NL West'} />
       </div>
-
-      <div>
-        <HittingLeaders stats={stats} />
-      </div>
     </>
   );
 }
 
 export async function getStaticProps() {
-  const res = await fetch(
+  const hRes = await fetch(
     `http://lookup-service-prod.mlb.com/json/named.leader_hitting_repeater.bam?sport_code='mlb'&results=5&game_type='R'&season='2021'&sort_column='avg'&leader_hitting_repeater`
+  );
+
+  const pRes = await fetch(
+    `http://lookup-service-prod.mlb.com/json/named.leader_pitching_repeater.bam?sport_code='mlb'&results=5&game_type='R'&season='2021'&sort_column='era'&leader_pitching_repeater`
   );
 
   const data = await res.json();

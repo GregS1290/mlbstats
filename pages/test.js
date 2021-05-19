@@ -1,12 +1,36 @@
-import DivisionCard from '../components/divisionCard';
-import { alEast } from '../teamdata';
+import HittingLeaders from '../components/hittingLeaders';
 
-export default function divisions() {
+export default function leaders(props) {
   return (
     <>
-      <DivisionCard teams={alEast} division={'AL East'} />
+      <HittingLeaders stats={props.hittingStats} />
       <br></br>
-      <DivisionCard teams={alEast} division={'AL East'} />
     </>
   );
+}
+
+export async function getStaticProps() {
+  const hRes = await fetch(
+    `http://lookup-service-prod.mlb.com/json/named.leader_hitting_repeater.bam?sport_code='mlb'&results=5&game_type='R'&season='2021'&sort_column='avg'&leader_hitting_repeater`
+  );
+
+  const pRes = await fetch(
+    `http://lookup-service-prod.mlb.com/json/named.leader_pitching_repeater.bam?sport_code='mlb'&results=5&game_type='R'&season='2021'&sort_column='era'&leader_pitching_repeater`
+  );
+
+  const hitterData = await hRes.json();
+  const pitcherData = await pRes.json();
+
+  const hittingStats =
+    hitterData.leader_hitting_repeater.leader_hitting_mux.queryResults.row;
+
+  const pitchingStats =
+    pitcherData.leader_pitching_repeater.leader_pitching_mux.queryResults.row;
+
+  return {
+    props: {
+      pitchingStats,
+      hittingStats,
+    },
+  };
 }

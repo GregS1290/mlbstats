@@ -6,8 +6,10 @@ function HittingLeaders({ stats }) {
       {stats.map((player) => (
         <div key={player.player_id}>
           <div>{player.name_display_first_last}</div>
-          <div>{player.avg}</div>
-          <div>{player.ops}</div>
+          <span>{player.team_name}</span>
+          <div>Avg: {player.avg}</div>
+          <div>OPS: {player.ops}</div>
+          <div>Homeruns: {player.hr}</div>
         </div>
       ))}
     </>
