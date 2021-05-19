@@ -21,47 +21,27 @@ const useStyles = makeStyles({
 
 export default function DivisionCard(props) {
   const classes = useStyles();
+  const { division, teams } = props;
 
   return (
     <Card className={classes.root}>
       <CardContent>
         <Typography className={classes.title} color='textPrimary' gutterBottom>
-          AL East
+          {division}
         </Typography>
 
-        <Typography className={classes.pos} color='textSecondary'>
-          <Link href='/147'>
-            <a>Yankees</a>
-          </Link>
-        </Typography>
-
-        <Typography className={classes.pos} color='textSecondary'>
-          <Link href='/111'>
-            <a>Red Sox</a>
-          </Link>
-        </Typography>
-
-        <Typography className={classes.pos} color='textSecondary'>
-          <Link href='/141'>
-            <a>Blue Jays</a>
-          </Link>
-        </Typography>
-
-        <Typography className={classes.pos} color='textSecondary'>
-          <Link href='/139'>
-            <a>Rays</a>
-          </Link>
-        </Typography>
-
-        <Typography className={classes.pos} color='textSecondary'>
-          <Link href='/110'>
-            <a>Orioles</a>
-          </Link>
-        </Typography>
+        {teams.map((team) => (
+          <Typography
+            key={team.id}
+            className={classes.pos}
+            color='textSecondary'
+          >
+            <Link href={team.id}>
+              <a>{team.club}</a>
+            </Link>
+          </Typography>
+        ))}
       </CardContent>
-      <CardActions>
-        <Button size='small'>Learn More</Button>
-      </CardActions>
     </Card>
   );
 }
