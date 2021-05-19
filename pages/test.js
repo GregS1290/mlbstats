@@ -1,10 +1,13 @@
 import HittingLeaders from '../components/hittingLeaders';
+import PitchingLeaders from '../components/pitchingLeaders';
 
 export default function leaders(props) {
+  console.log(props.pitchingStats);
   return (
     <>
       <HittingLeaders stats={props.hittingStats} />
       <br></br>
+      <PitchingLeaders stats={props.pitchingStats} />
     </>
   );
 }
