@@ -1,3 +1,5 @@
+import PositionCard from './positionStatsCard';
+
 function HittingLeaders({ stats }) {
   return (
     <>
@@ -5,11 +7,7 @@ function HittingLeaders({ stats }) {
 
       {stats.map((player) => (
         <div key={player.player_id}>
-          <h4>{player.name_display_first_last}</h4>
-          <span>{player.team_name}</span>
-          <div>Avg: {player.avg}</div>
-          <div>OPS: {player.ops}</div>
-          <div>Homeruns: {player.hr}</div>
+          <PositionCard playerStats={player} />
         </div>
       ))}
     </>
