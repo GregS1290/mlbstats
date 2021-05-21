@@ -6,6 +6,7 @@ function PitcherCard({ playerStats }) {
       <h4>{name_display_first_last}</h4>
       <div>{team_name}</div>
       <div>ERA: {era}</div>
+      <div>Innings: {ip}</div>
       <div>Strikeouts: {so}</div>
       <div>WHIP: {whip}</div>
     </>

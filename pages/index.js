@@ -5,6 +5,9 @@ import Link from 'next/link';
 import HittingLeaders from '../components/hittingLeaders';
 import DivisionCard from '../components/divisionCard';
 import PitchingLeaders from '../components/pitchingLeaders';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
 
 import {
   alEast,
@@ -15,39 +18,49 @@ import {
   nlWest,
 } from '../teamdata';
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+}));
+
 export default function Home(props) {
   const { hittingStats, pitchingStats } = props;
+  const classes = useStyles();
+
   return (
-    <>
-      <div>
-        <HittingLeaders stats={hittingStats} />
-      </div>
-      <div>
-        <PitchingLeaders stats={pitchingStats} />
-      </div>
-      <div>
-        <Link href='/stats'>
-          <a>Aaron Judge</a>
-        </Link>
-      </div>
+    <div className={classes.root}>
+      <Grid container spacing={1}>
+        <Grid item xs={12} sm={6}>
+          <HittingLeaders stats={hittingStats} />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <PitchingLeaders stats={pitchingStats} />
+        </Grid>
 
-      <div>
-        <DivisionCard teams={alEast} division={'AL East'} />
-        <br />
-        <DivisionCard teams={alCentral} division={'AL Central'} />
-        <br />
-        <DivisionCard teams={alWest} division={'AL West'} />
-        <br />
-      </div>
+        <Grid item xs={12} sm={6}>
+          <DivisionCard teams={alEast} division={'AL East'} />
+          <br />
+          <DivisionCard teams={alCentral} division={'AL Central'} />
+          <br />
+          <DivisionCard teams={alWest} division={'AL West'} />
+          <br />
+        </Grid>
 
-      <div>
-        <DivisionCard teams={nlEast} division={'NL East'} />
-        <br />
-        <DivisionCard teams={nlCentral} division={'NL Central'} />
-        <br />
-        <DivisionCard teams={nlWest} division={'NL West'} />
-      </div>
-    </>
+        <Grid item xs={12} sm={6}>
+          <DivisionCard teams={nlEast} division={'NL East'} />
+          <br />
+          <DivisionCard teams={nlCentral} division={'NL Central'} />
+          <br />
+          <DivisionCard teams={nlWest} division={'NL West'} />
+        </Grid>
+      </Grid>
+    </div>
   );
 }
 
